@@ -33,5 +33,5 @@ class Address(Base):
 
 
 if __name__ == '__main__':
-    Base.metadata.create_all(engine)
-    # Base.metadata.drop_all(engine)  # 删除所有表
+    # Base.metadata.create_all(engine)
+    Base.metadata.drop_all(engine)  # 删除所有表

@@ -3,6 +3,7 @@ import sys
 from sqltool.mysql_client import MySqlClient
 import os
 import logging
+from conf.configs import MYSQLCONFIG
 
 logger = logging.getLogger('sls')
 
@@ -15,17 +16,17 @@ sys.path.append(base_dir)
 class SqltoolDetail:
 
     def __init__(self):
-        self.sqltool_conn = MySqlClient(
-            host=MYSQL_HOST,
-            port=MYSQL_PORT,
-            user=MYSQL_USER,
-            password=MYSQL_PASSWORD,
-            db=MYSQL_LJ_ID_DB
+        self.conn = MySqlClient(
+            **MYSQLCONFIG
         )
-        self.pip_cli = MySqlClient(
-            host=MYSQL_HOST,
-            port=MYSQL_PORT,
-            user=MYSQL_USER,
-            password=MYSQL_PASSWORD,
-            db=MYSQL_SPIDER_DB
-        )
+
+
+sqltool_detail = SqltoolDetail()
+insert_data = {'name': '123', 'fullname': '123'}
+sqltool_detail.conn.insert(items=[insert_data], table_name="user_account",
+                           field_list=list(insert_data.keys()), fail_raise=True)
+# sqltool_detail.conn.update(table_name='lj_id_map_project',
+#                        update_columns={'full_name': res['full_name'], 'type': res['type']},
+#                        fail_raise=True,
+#                        wheres={"lj_project_id": res['lj_project_id']}
+#                        )

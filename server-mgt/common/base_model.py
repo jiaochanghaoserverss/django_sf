@@ -8,7 +8,7 @@ class Base(DeclarativeBase):
 
 
 from sqlalchemy import create_engine
-link = "mysql+pymysql://{db_user}:{db_pwd}@{db_host}:{db_port}/{db_name}?charset=utf8".format(
+link = "mysql+pymysql://{user}:{password}@{host}:{port}/{database}?charset=utf8".format(
     **MYSQLCONFIG
 )
 engine = create_engine(link, echo=True)
